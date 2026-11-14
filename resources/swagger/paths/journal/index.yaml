@@ -1,0 +1,122 @@
+post:
+  tags:
+    - Journal
+  summary: "Список логов"
+  description: "ACL: cabinet - собственные (ограниченный), cabinet.journal.read - все"
+  security:
+    - Bearer: []
+
+#  parameters:
+
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: "../../index.yaml#/components/requestBodies/cursor"
+            - $ref: "../../index.yaml#/components/requestBodies/per_page"
+            - $ref: "../../index.yaml#/components/requestBodies/filter_created_at"
+            - $ref: "../../index.yaml#/components/requestBodies/sort_id"
+            - type: "object"
+              properties:
+                filter:
+                  description: "Фильтры"
+                  type: "object"
+                  properties:
+                    user_id:
+                      description: 'Поле "Пользователь (инициатор)"'
+                      type: "object"
+                      properties:
+                        "in":
+                          description: 'Операция "входит в список"'
+                          type: "array"
+                          items:
+                            type: "integer"
+                            example: 10
+                    entity:
+                      description: 'Поле "Сущность"'
+                      type: "object"
+                      properties:
+                        "in":
+                          description: 'Операция "входит в список"'
+                          type: "array"
+                          items:
+                            type: "string"
+                            example: "user"
+                    entity_id:
+                      description: 'Поле "ID сущности"'
+                      type: "object"
+                      properties:
+                        "in":
+                          description: 'Операция "входит в список"'
+                          type: "array"
+                          items:
+                            type: "integer"
+                            example: 20
+                    type:
+                      description: 'Поле "Тип"'
+                      type: "object"
+                      properties:
+                        "in":
+                          description: 'Операция "входит в список"'
+                          type: "array"
+                          items:
+                            type: "string"
+                            example: "metric"
+                    event:
+                      description: 'Поле "Событие"'
+                      type: "object"
+                      properties:
+                        "in":
+                          description: 'Операция "входит в список"'
+                          type: "array"
+                          items:
+                            type: "string"
+                            example: "user_token_obtain"
+                    success:
+                      description: 'Поле "Успешность"'
+                      type: "object"
+                      properties:
+                        "=":
+                          description: 'Операция "равно"'
+                          type: "boolean"
+                          example: true
+                    tags:
+                      description: 'Поле "Теги"'
+                      type: "object"
+                      properties:
+                        "json-contains":
+                          description: 'Операция "входит в JSON"'
+                          type: "array"
+                          items:
+                            type: "string"
+                            example: "foobar"
+
+        examples:
+          default:
+            summary: "Все параметры"
+          empty:
+            summary: "Без параметров"
+            value: "[]"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  data:
+                    type: "array"
+                    description: "Список"
+                    items:
+                      allOf:
+                        - $ref: "../../index.yaml#/components/schemas/journal_heavy"
+              - $ref: "../../index.yaml#/components/responses/cursor_paginate"
+          examples:
+            default:
+              summary: "Список с результатами"
+            empty:
+              $ref: "../../index.yaml#/components/examples/cursor_paginate_empty"

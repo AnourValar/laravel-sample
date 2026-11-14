@@ -1,0 +1,47 @@
+post:
+  tags:
+    - Ticket
+  summary: "Изменение тикета"
+  description: "ACL: cabinet.ticket.update - все"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "ticket_id"
+      in: "path"
+      description: "ID (тикет)"
+      example: "10000"
+      required: true
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                ticket:
+                  allOf:
+                    - $ref: "../../index.yaml#/components/schemas/ticket_heavy"
+                    - properties:
+                        author_id:
+                          readOnly: true
+                        type:
+                          readOnly: true
+                        data_request:
+                          readOnly: true
+            - required:
+              - "ticket"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  ticket:
+                    $ref: "../../index.yaml#/components/responses/id"

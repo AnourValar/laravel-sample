@@ -1,0 +1,98 @@
+post:
+  tags:
+    - Analytics
+  summary: "Агрегация по пользователям"
+  description: "ACL: cabinet - cобственные"
+  security:
+    - Bearer: []
+#    - {}
+
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                page:
+                  description: "Страница"
+                  type: "integer"
+                  example: 1
+                per_page:
+                  description: "Размер страницы"
+                  type: "integer"
+                  enum: [20, 50, 100]
+                sort_column:
+                  description: "Колонка сортировки"
+                  type: "string"
+                  enum:
+                    - id
+                    - created_at
+                    - last_login_at
+                    - deleted_at
+                  default: id
+                  example: "created_at"
+                sort_direction:
+                  description: "Направление сортировки"
+                  type: "string"
+                  enum: [ASC, DESC]
+            - required:
+              - "page"
+              - "per_page"
+              - "sort_column"
+              - "sort_direction"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  data:
+                    description: "Список пользователей со сводными показателями"
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        id:
+                          description: "ID пользователя"
+                          type: "integer"
+                          example: 10000
+                        first_name:
+                          description: "Имя"
+                          type:
+                            - "string"
+                            - "null"
+                          example: "Иван"
+                        last_name:
+                          description: "Фамилия"
+                          type:
+                            - "string"
+                            - "null"
+                          example: "Иванов"
+                        middle_name:
+                          description: "Отчество"
+                          type:
+                            - "string"
+                            - "null"
+                          example: "Иванович"
+                        created_at:
+                          description: "Дата создания пользователя [UTC]"
+                          type: "string"
+                          example: "2026-01-01 10:00:00"
+                        last_login_at:
+                          description: "Дата последнего входа [UTC]"
+                          type:
+                            - "string"
+                            - "null"
+                          example: "2026-05-21 09:15:00"
+                        deleted_at:
+                          description: "Дата удаления [UTC]"
+                          type:
+                            - "string"
+                            - "null"
+                          example: null
+              - $ref: "../../index.yaml#/components/responses/simple_paginate"

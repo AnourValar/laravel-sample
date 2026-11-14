@@ -1,0 +1,41 @@
+allOf:
+  - description: "Настройки уведомлений (light)"
+    type: "object"
+    properties:
+      id:
+        description: "ID (уведомление)"
+        type: "integer"
+        readOnly: true
+        writeOnly: false
+        example: 1
+
+      user_id:
+        description: "Пользователь (ID)"
+        type: "integer"
+        readOnly: false
+        writeOnly: false
+        example: 2
+                
+      trigger:
+        description: "Тип (см. /auth/state -> user_notification_triggers)"
+        type: "string"
+        readOnly: false
+        writeOnly: false
+        example: "user_email_updated"
+
+      channels:
+        description: "Каналы (см. /auth/state -> user_notification_channels)"
+        type: "array"
+        readOnly: false
+        writeOnly: false
+        items:
+          description: "Канал"
+          type: "string"
+          example: "telegram"
+
+      created_at:
+        description: "Дата добавления (ISO-8601)"
+        type: "string"
+        readOnly: true
+        writeOnly: false
+        example: "2024-07-20T11:21:00.000000Z"

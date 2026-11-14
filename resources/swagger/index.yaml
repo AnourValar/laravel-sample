@@ -1,0 +1,279 @@
+openapi: 3.1.0
+info:
+  title: laravel-sample API
+  description: |
+    * **Обязательные заголовки** и **ответы с ошибками** описаны только в группе \"Все запросы\", т.к. они идентичны для всех веб-сервисов;
+    * **Токен** не имеет срока жизни, но в любой момент может быть отозван вручную;
+    * **Все datetime** поля в response представлены в формате ISO-8601 (UTC). В request даты могут отправляться в любом формате, но в часовом поясе UTC.
+    * Справочник virtual_file.name (по entity):
+      * field: attachment [зависит от field.name]
+      * ticket: attachment_request, attachment_response
+
+  version: 0.1.0
+
+servers:
+  - url: http://laravel-sample.loc/api
+    description: Sandbox
+
+tags:
+  - name: "*"
+    description: Все запросы
+  - name: Auth
+    description: Аутентификация
+  - name: User
+    description: Пользователь
+  - name: Notification
+    description: Уведомление ЛК
+  - name: Directory
+    description: Справочник
+  - name: Field
+    description: Поля
+  - name: Analytics
+    description: Аналитика
+  - name: File
+    description: Файлы
+  - name: Ticket
+    description: Тикет
+  - name: Journal
+    description: Журнал (логирование)
+
+components:
+  schemas:
+    file_virtual_light:
+      $ref: schemas/file_virtual_light.yaml
+    user_light:
+      $ref: schemas/user_light.yaml
+    user_heavy:
+      $ref: schemas/user_heavy.yaml
+    user_token_light:
+      $ref: schemas/user_token_light.yaml
+    user_token_heavy:
+      $ref: schemas/user_token_heavy.yaml
+    user_factors:
+      $ref: schemas/user_factors.yaml
+    directory_light:
+      $ref: schemas/directory_light.yaml
+    directory_heavy:
+      $ref: schemas/directory_heavy.yaml
+    user_notification_light:
+      $ref: schemas/user_notification_light.yaml
+    notification_light:
+      $ref: schemas/notification_light.yaml
+    notification_heavy:
+      $ref: schemas/notification_heavy.yaml
+    field_light:
+      $ref: schemas/field_light.yaml
+    field_heavy:
+      $ref: schemas/field_heavy.yaml
+    ticket_light:
+      $ref: schemas/ticket_light.yaml
+    ticket_heavy:
+      $ref: schemas/ticket_heavy.yaml
+    journal_heavy:
+      $ref: schemas/journal_heavy.yaml
+
+  requestBodies:
+    confirm_email:
+      $ref: requestBodies/confirm_email.yaml
+    confirm_phone:
+      $ref: requestBodies/confirm_phone.yaml
+    confirm_pow:
+      $ref: requestBodies/confirm_pow.yaml
+    per_page:
+      $ref: requestBodies/per_page.yaml
+    page:
+      $ref: requestBodies/page.yaml
+    cursor:
+      $ref: requestBodies/cursor.yaml
+
+    filter_created_at:
+      $ref: requestBodies/filter_created_at.yaml
+    filter_deleted_at:
+      $ref: requestBodies/filter_deleted_at.yaml
+    filter_id:
+      $ref: requestBodies/filter_id.yaml
+    filter_search:
+      $ref: requestBodies/filter_search.yaml
+    relation_fileVirtuals:
+      $ref: requestBodies/relation_fileVirtuals.yaml
+    sort_id:
+      $ref: requestBodies/sort_id.yaml
+    sort_deleted_at:
+      $ref: requestBodies/sort_deleted_at.yaml
+
+  responses:
+    id:
+      $ref: responses/id.yaml
+    paginate:
+      $ref: responses/paginate.yaml
+    simple_paginate:
+      $ref: responses/simple_paginate.yaml
+    cursor_paginate:
+      $ref: responses/cursor_paginate.yaml
+
+    400:
+      $ref: responses/400.yaml
+    401:
+      $ref: responses/401.yaml
+    403:
+      $ref: responses/403.yaml
+    404:
+      $ref: responses/404.yaml
+    405:
+      $ref: responses/405.yaml
+    422:
+      $ref: responses/422.yaml
+    429:
+      $ref: responses/429.yaml
+
+  examples:
+    paginate_empty:
+      $ref: examples/paginate_empty.yaml
+    simple_paginate_empty:
+      $ref: examples/simple_paginate_empty.yaml
+    cursor_paginate_empty:
+      $ref: examples/cursor_paginate_empty.yaml
+
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: Токен пользователя
+    Token:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Токен сервера
+
+paths: # laravel-sample -> partial commenting
+  /*:
+    $ref: paths/review.yaml
+
+  /auth/confirm/pow:
+    $ref: paths/auth/confirm_pow.yaml
+  /auth/confirm/email:
+    $ref: paths/auth/confirm_email.yaml
+  /auth/confirm/phone:
+    $ref: paths/auth/confirm_phone.yaml
+  /auth/fa/phone:
+    $ref: paths/auth/fa_phone.yaml
+  /auth/fa/email:
+    $ref: paths/auth/fa_email.yaml
+  /auth/fa/password:
+    $ref: paths/auth/fa_password.yaml
+  /auth/fa/session:
+    $ref: paths/auth/fa_session.yaml
+  /auth/fa/totp:
+    $ref: paths/auth/fa_totp.yaml
+  /auth/change/password:
+    $ref: paths/auth/change_password.yaml
+  /auth/register:
+    $ref: paths/auth/register.yaml
+  /auth/login:
+    $ref: paths/auth/login.yaml
+  /auth/state:
+    $ref: paths/auth/state.yaml
+
+  /user/:
+    $ref: paths/user/index.yaml
+  /user/index/export/{format}:
+    $ref: paths/user/index_export.yaml
+  /user/{user_id}:
+    $ref: paths/user/edit.yaml
+  /user/create:
+    $ref: paths/user/create.yaml
+  /user/update/{user_id}:
+    $ref: paths/user/update.yaml
+  /user/update/email/{user_id}:
+    $ref: paths/user/update_email.yaml
+  /user/update/phone/{user_id}:
+    $ref: paths/user/update_phone.yaml
+  /user/update/telegram/{user_id}:
+    $ref: paths/user/update_telegram.yaml
+  /user/revoke/email/{user_id}:
+    $ref: paths/user/revoke_email.yaml
+  /user/revoke/phone/{user_id}:
+    $ref: paths/user/revoke_phone.yaml
+  /user/delete/{user_id}:
+    $ref: paths/user/delete.yaml
+  /user/restore/{user_id}:
+    $ref: paths/user/restore.yaml
+  /user/totp/generate:
+    $ref: paths/user/totp_generate.yaml
+  /user/totp/update:
+    $ref: paths/user/totp_update.yaml
+  /user/totp/revoke:
+    $ref: paths/user/totp_revoke.yaml
+
+  /user/token/index:
+    $ref: paths/user_token/index.yaml
+  /user/token/delete/{token_id}:
+    $ref: paths/user_token/delete.yaml
+  /user/token/delete_except/{token_id}:
+    $ref: paths/user_token/delete_except.yaml
+  /user/token/push/{token_id}:
+    $ref: paths/user_token/push.yaml
+
+  /user/notification/index/{user_id}:
+    $ref: paths/user_notification/index.yaml
+  /user/notification/sync/{user_id}:
+    $ref: paths/user_notification/sync.yaml
+
+  /notification/:
+    $ref: paths/notification/index.yaml
+  /notification/{notification_id}:
+    $ref: paths/notification/edit.yaml
+  /notification/mark_read/all:
+    $ref: paths/notification/mark_read_all.yaml
+  /notification/mark_read/{notification_id}:
+    $ref: paths/notification/mark_read.yaml
+  /notification/personal_message/{user_id}:
+    $ref: paths/notification/personal_message.yaml
+
+  /directory/:
+    $ref: paths/directory/index.yaml
+  /directory/{directory_id}:
+    $ref: paths/directory/edit.yaml
+  /directory/create:
+    $ref: paths/directory/create.yaml
+  /directory/update/{directory_id}:
+    $ref: paths/directory/update.yaml
+  /directory/delete/{directory_id}:
+    $ref: paths/directory/delete.yaml
+  /directory/attach/{entity}:
+    $ref: paths/directory/attach.yaml
+  /directory/detach/{entity}:
+    $ref: paths/directory/detach.yaml
+  /directory/set/{entity}:
+    $ref: paths/directory/set.yaml
+
+  /field/index/user/{user_id}:
+    $ref: paths/field/index_user.yaml
+  /field/{name}/save/user/{user_id}:
+    $ref: paths/field/save_user.yaml
+  /field/{name}/upload/user/{user_id}:
+    $ref: paths/field/upload_user.yaml
+  /field/{name}/delete/user/{user_id}:
+    $ref: paths/field/delete_user.yaml
+  /field/{name}/update/user/{user_id}:
+    $ref: paths/field/update_user.yaml
+
+  /file/upload/{entity}/{entity_id}/{name}:
+    $ref: paths/file/upload.yaml
+  /file/delete/{file_virtual}:
+    $ref: paths/file/delete.yaml
+
+  /analytics/user_totals:
+    $ref: paths/analytics/user_totals.yaml
+
+  /ticket/:
+    $ref: paths/ticket/index.yaml
+  /ticket/{ticket_id}:
+    $ref: paths/ticket/edit.yaml
+  /ticket/create:
+    $ref: paths/ticket/create.yaml
+  /ticket/update/{ticket_id}:
+    $ref: paths/ticket/update.yaml
+
+  /journal/:
+    $ref: paths/journal/index.yaml

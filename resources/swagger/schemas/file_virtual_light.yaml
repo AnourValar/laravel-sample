@@ -1,0 +1,80 @@
+allOf:
+  - description: "Виртуальный файл (light)"
+    type: "object"
+    properties:
+      id:
+        description: "ID"
+        type: "integer"
+        readOnly: true
+        writeOnly: false
+        example: 1
+
+      name:
+        description: "Техническое название (бизнес группа)"
+        type: "string"
+        readOnly: false
+        writeOnly: false
+        example: "<name>"
+
+      filename:
+        description: "Имя файла"
+        type: "string"
+        readOnly: true
+        writeOnly: false
+        example: "file.jpg"
+
+      title:
+        description: "Описание"
+        type:
+          - "string"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: "Фотография"
+
+      created_at:
+        description: "Дата загрузки (ISO-8601)"
+        type: "string"
+        readOnly: true
+        writeOnly: false
+        example: "2024-05-21T11:15:00.000000Z"
+
+      mime_type:
+        description: "Тип файла (mime)"
+        type:
+          - "string"
+          - "null"
+        readOnly: true
+        writeOnly: false
+        example: "image/jpeg"
+
+      size:
+        description: "Размер файла (в байтах)"
+        type: "integer"
+        readOnly: true
+        writeOnly: false
+        example: 17227
+
+      url:
+        description: "Ссылка на исходный (оригинальный) файл [прямая или прокси]"
+        type:
+          - "string"
+          - "null"
+        readOnly: true
+        writeOnly: false
+        example: "http://storage.loc/storage/image.jpg"
+
+      url_generate:
+        description: "Ссылки на сгенерированные (побочные) файлы [прямая или прокси]"
+        type:
+          - "object"
+          - "null"
+        readOnly: true
+        writeOnly: false
+        properties:
+          preview:
+            description: "Превью"
+            type: "string"
+            readOnly: true
+            writeOnly: false
+            example: "http://storage.loc/storage/image_preview.jpg"

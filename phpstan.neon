@@ -1,0 +1,69 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
+
+parameters:
+
+    paths:
+        - app
+        - config
+        - database
+        - lang
+        - resources
+        - routes
+        - tests
+
+    # Level 10 is the highest level
+    level: 5
+
+    ignoreErrors:
+        - '#Call to an undefined static method#'
+        - '#Access to an undefined property App\\#'
+        - '#is not covariant with PHPDoc#'
+        - '#Call to an undefined method [a-zA-Z0-9\\_\<\>\:\|]+\(\)#'
+        - '#count\(\) expects int\|null\, float given\.#'
+        - '#Method Illuminate\\Routing\\RouteRegistrar\:\:middleware\(\) invoked with \d+ parameters\, 1 required\.#'
+        - '#Factory\:\:definition\(\) should be compatible with return type#'
+        - '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:#'
+        - '#Parameter \#1 \$expected of method PHPUnit\\Framework\\Assert\:\:assertSame\(\) contains unresolvable type#'
+        - '#Access to an undefined property Illuminate\\Contracts\\Auth\\Authenticatable#'
+        - '#Argument of an invalid type string supplied for foreach\, only iterables are supported#'
+        - '#Called .pluck. on Laravel collection\, but could have been retrieved as a query#'
+        - '#App\\Services\\FieldService\:\:flushCache\(\) expects int\, \(object\|string\|null\) given#'
+        - '#Call to an undefined method Illuminate\\Support\\HigherOrderTapProxy#'
+        - '#Binary operation \"\*\" between \d+ and non-empty-string#'
+        - '#expects App\\[A-Za-z]+, Illuminate\\Database\\Eloquent\\Model given#'
+        - '#expects App\\User, Illuminate\\Contracts\\Auth\\Authenticatable given#'
+        - '#DatabaseNotification\>\:\:create\(\) expects array\<model property of#'
+        - '#Call to function is_string\(\) with string will always evaluate to true#'
+        - '#expects App\\Journal\, AnourValar\\EloquentJournal\\Journal given#'
+        - '#\) on iterable#'
+        - '#Cannot call static method factory\(\) on class-string\|false#'
+        - '#\<int\,App\\Directory\>\:\:transform\(\) contains unresolvable type#'
+        - '#.asc.\|.desc.\|SortDirection\, .ASC. given#'
+        - '#.asc.\|.desc.\|SortDirection\, .DESC. given#'
+        - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation#'
+        - '#Call to method PHPUnit\\Framework\\Assert\:\:assertSame#'
+        - '#Model\:\:forceFill\(\) expects array\<model#'
+
+    excludePaths:
+
+    checkFunctionNameCase: true
+    checkInternalClassCaseSensitivity: true
+    reportMaybesInMethodSignatures: true
+    reportStaticMethodSignatures: true
+    checkUninitializedProperties: true
+    checkDynamicProperties: true
+    reportAlwaysTrueInLastCondition: true
+    reportWrongPhpDocTypeInVarTag: true
+    checkMissingCallableSignature: true
+    reportPossiblyNonexistentGeneralArrayOffset: true
+    reportPossiblyNonexistentConstantArrayOffset: true
+    reportAnyTypeWideningInVarTag: true
+
+    noUnnecessaryCollectionCall: true
+    checkModelProperties: true
+    checkOctaneCompatibility: true
+    #checkUnusedViews: true
+    noEnvCallsOutsideOfConfig: true
+    checkModelAppends: true

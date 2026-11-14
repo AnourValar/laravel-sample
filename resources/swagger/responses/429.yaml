@@ -1,0 +1,21 @@
+description: "Слишком много запросов"
+content:
+  application/json:
+    schema:
+      type: "object"
+      properties:
+        message:
+          description: "Техническое название"
+          type: "string"
+          example: "Too Many Attempts."
+
+        errors:
+          description: "Ключи ошибок"
+          type: "object"
+          properties:
+            error:
+              type: "array"
+              items:
+                description: "Пользовательские сообщения"
+                type: "string"
+                example: "Слишком много запросов. Пожалуйста, попробуйте еще раз через 20 секунд."

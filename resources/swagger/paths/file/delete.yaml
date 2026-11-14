@@ -1,0 +1,28 @@
+post:
+  tags:
+    - File
+  summary: "Удаление файла"
+  description: "ACL: cabinet - собственные, cabinet.ENTITY.update - все"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "file_virtual"
+      in: "path"
+      description: "ID (файл)"
+      example: "4"
+      required: true
+
+#  requestBody:
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  file_virtual:
+                    $ref: "../../index.yaml#/components/responses/id"

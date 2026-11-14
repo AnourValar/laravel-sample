@@ -1,0 +1,29 @@
+get:
+  tags:
+    - Directory
+  summary: "Карточка справочника"
+  description: "ACL: guest - общие, cabinet - собственные & общие, cabinet.directory.read - все"
+  security:
+    - Bearer: []
+    - {}
+
+  parameters:
+    - name: "directory_id"
+      in: "path"
+      description: "ID (справочник)"
+      example: "10000"
+      required: true
+
+#  requestBody:
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  directory:
+                    $ref: "../../index.yaml#/components/schemas/directory_heavy"

@@ -1,0 +1,138 @@
+<?php
+
+return [
+    'models' => [
+        'file_physical' => App\FilePhysical::class,
+        'file_virtual' => App\FileVirtual::class,
+    ],
+
+    'file_physical' => [
+        'visibility' => [
+            'public' => [
+                'bind' => AnourValar\EloquentFile\Handlers\Models\FilePhysical\Visibility\PublicVisibility::class,
+                'disks' => explode(',', env('ELOQUENT_FILE_PUBLIC', 's3_public')),
+            ],
+
+            'private' => [
+                'bind' => AnourValar\EloquentFile\Handlers\Models\FilePhysical\Visibility\PrivateVisibility::class,
+                'disks' => explode(',', env('ELOQUENT_FILE_PRIVATE', 's3_private')),
+
+                'proxy_route' => 'file.download',
+                'proxy_route_method' => AnourValar\EloquentFile\Handlers\Models\FilePhysical\Visibility\PrivateVisibility::METHOD_URL_SIGNED_DIRECT,
+            ],
+
+            'private_encrypt' => [
+                'bind' => AnourValar\EloquentFile\Handlers\Models\FilePhysical\Visibility\PrivateEncryptVisibility::class,
+                'disks' => explode(',', env('ELOQUENT_FILE_PRIVATE', 's3_private')),
+
+                'proxy_route' => 'file.download',
+                'proxy_route_method' => AnourValar\EloquentFile\Handlers\Models\FilePhysical\Visibility\PrivateVisibility::METHOD_URL_SIGNED,
+            ],
+        ],
+
+        'type' => [
+            /*'simple' => [
+                'bind' => AnourValar\EloquentFile\Handlers\Models\FilePhysical\Type\SimpleType::class,
+                'rules' => ['max:10240', 'extensions:zip,rar,pdf,gz,jpg,jpeg,png,gif,webp,avif,heif,heic,svg,ico,txt,html,xls,xlsx,doc,docx,ppt,pptx,xml,mp3,mp4,mov'],
+                'rules_validate_mime_by_extension' => false, // "mimes" rule
+            ],*/
+
+            /*'image' => [
+                'bind' => AnourValar\EloquentFile\Handlers\Models\FilePhysical\Type\ImageType::class,
+                'rules' => ['max:10240', 'extensions:jpg,jpeg,png,gif,webp,avif,heif', 'dimensions:min_width=100,min_height=100'], // "heic" is not supported by "dimensions"
+                'rules_validate_mime_by_extension' => true,
+
+                'keep_original' => true,
+                'generate' => [
+                    'preview' => [
+                        'visibility' => 'public',
+                        'max_height' => 1000,
+                        'max_width' => 1000,
+                        'format' => 'webp',
+                        'quality' => 82,
+                        'clean_metadata' => true,
+                    ],
+                ],
+            ],*/
+
+            'document_image' => [
+                'bind' => AnourValar\EloquentFile\Handlers\Models\FilePhysical\Type\SimpleType::class,
+                'rules' => ['max:4096', 'extensions:jpg,jpeg,png,gif,webp,avif', 'dimensions:min_width=400,min_height=400'],
+                'rules_validate_mime_by_extension' => true,
+            ],
+
+            'document_pdf' => [
+                'bind' => AnourValar\EloquentFile\Handlers\Models\FilePhysical\Type\SimpleType::class,
+                'rules' => ['max:4096', 'extensions:pdf'],
+                'rules_validate_mime_by_extension' => true,
+            ],
+        ],
+    ],
+
+    'file_virtual' => [
+        'entity' => [
+            'field' => [
+                'bind' => App\Handlers\Models\FileVirtual\Entity\FieldEntity::class,
+                'name' => [
+                    'attachment' => [
+                        'bind' => AnourValar\EloquentFile\Handlers\Models\FileVirtual\Name\SimpleName::class,
+                        'title' => 'eloquent_file::file_virtual.entity.field.name.attachment',
+                        'policy' => [
+                            'bind' => AnourValar\EloquentFile\Handlers\Models\FileVirtual\Entity\Policy\UniquePolicy::class,
+                            'limit_qty' => 0,
+                            'limit_size' => 0,
+                        ],
+                        'visibility' => 'private_encrypt',
+                        'types' => ['pdf' => 'document_pdf', '*' => 'document_image'],
+                    ],
+                ],
+            ],
+
+            'ticket' => [
+                'bind' => App\Handlers\Models\FileVirtual\Entity\TicketEntity::class,
+                'name' => [
+                    'attachment_request' => [
+                        'bind' => AnourValar\EloquentFile\Handlers\Models\FileVirtual\Name\SimpleName::class,
+                        'title' => 'eloquent_file::file_virtual.entity.ticket.name.attachment_request',
+                        'policy' => [
+                            'bind' => AnourValar\EloquentFile\Handlers\Models\FileVirtual\Entity\Policy\ListPolicy::class,
+                            'limit_qty' => 5,
+                            'limit_size' => 0,
+                        ],
+                        'visibility' => 'private',
+                        'types' => ['pdf' => 'document_pdf', '*' => 'document_image'],
+                    ],
+
+                    'attachment_response' => [
+                        'bind' => AnourValar\EloquentFile\Handlers\Models\FileVirtual\Name\SimpleName::class,
+                        'title' => 'eloquent_file::file_virtual.entity.ticket.name.attachment_response',
+                        'policy' => [
+                            'bind' => AnourValar\EloquentFile\Handlers\Models\FileVirtual\Entity\Policy\ListPolicy::class,
+                            'limit_qty' => 5,
+                            'limit_size' => 0,
+                        ],
+                        'visibility' => 'private',
+                        'types' => ['pdf' => 'document_pdf', '*' => 'document_image'],
+                    ],
+                ],
+            ],
+
+            /*'user' => [
+                'bind' => AnourValar\EloquentFile\Handlers\Models\FileVirtual\Entity\UserEntity::class,
+                'name' => [
+                    'avatar' => [
+                        'bind' => AnourValar\EloquentFile\Handlers\Models\FileVirtual\Name\SimpleName::class,
+                        'title' => 'eloquent_file::file_virtual.entity.user.name.avatar',
+                        'policy' => [
+                            'bind' => AnourValar\EloquentFile\Handlers\Models\FileVirtual\Entity\Policy\UniquePolicy::class,
+                            'limit_qty' => 0,
+                            'limit_size' => 0,
+                        ],
+                        'visibility' => 'public',
+                        'types' => ['*' => 'image'],
+                    ],
+                ],
+            ],*/
+        ],
+    ],
+];

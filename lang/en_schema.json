@@ -1,0 +1,49 @@
+{
+    "source_locale": "ru",
+    "target_locale": "en",
+
+    "adapter": "AnourValar\\LaravelInterpreter\\Adapters\\JsonAdapter",
+    "filename": "en_i18.json",
+
+    "include_json": false,
+
+    "lang_files": {
+        "exclude": [],
+
+        "include": [
+            "/eloquent_journal/",
+            "/eloquent_notification/",
+            "/eloquent_file/",
+            "/laravel_atom/",
+            "/eloquent_validation/",
+            "/eloquent_request/",
+
+            "/controllers/api/",
+            "/directory/",
+            "/handlers/",
+            "/models/",
+            "/policies/",
+
+            "admin.php",
+            "form.php",
+            "package.php"
+        ],
+
+        "exclude_keys": []
+    },
+
+    "view_files": {
+        "exclude": [],
+
+        "include": ["/notifications/"]
+    },
+
+    "vendor_view_files": {
+        "exclude": [],
+
+        "include": ["/anourvalar/eloquent-journal/", "/anourvalar/laravel-form/"]
+    },
+
+    "exclude_phrases": ["ID", "Email", "E-Mail"],
+    "include_pattern": null
+}

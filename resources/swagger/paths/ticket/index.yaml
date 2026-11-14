@@ -1,0 +1,98 @@
+post:
+  tags:
+    - Ticket
+  summary: "Список тикетов"
+  description: "ACL: cabinet - собственные, cabinet.ticket.read - все"
+  security:
+    - Bearer: []
+
+#  parameters:
+
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: "../../index.yaml#/components/requestBodies/page"
+            - $ref: "../../index.yaml#/components/requestBodies/per_page"
+            - $ref: "../../index.yaml#/components/requestBodies/filter_created_at"
+            - $ref: "../../index.yaml#/components/requestBodies/sort_id"
+            - type: "object"
+              properties:
+                filter:
+                  description: "Фильтры"
+                  type: "object"
+                  properties:
+                    author_id:
+                      description: 'Поле "Автор"'
+                      type: "object"
+                      properties:
+                        "in":
+                          description: 'Операция "входит в список"'
+                          type: "array"
+                          items:
+                            type: "integer"
+                            example: 10005
+                    moderator_id:
+                      description: 'Поле "Модератор"'
+                      type: "object"
+                      properties:
+                        "in":
+                          description: 'Операция "входит в список"'
+                          type: "array"
+                          items:
+                            type: "integer"
+                            example: 10002
+                        "is-null":
+                          description: 'Операция "не заполнен"'
+                          type: "booealn"
+                          example: true
+                    type:
+                      description: 'Поле "Тип"'
+                      type: "object"
+                      properties:
+                        "in":
+                          description: 'Операция "входит в список"'
+                          type: "array"
+                          items:
+                            type: "string"
+                            example: "user_moderate"
+                    status:
+                      description: 'Поле "Статус"'
+                      type: "object"
+                      properties:
+                        "in":
+                          description: 'Операция "входит в список"'
+                          type: "array"
+                          items:
+                            type: "string"
+                            example: new
+
+        examples:
+          default:
+            summary: "Все параметры"
+          empty:
+            summary: "Без параметров"
+            value: "[]"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  data:
+                    type: "array"
+                    description: "Список"
+                    items:
+                      allOf:
+                        - $ref: "../../index.yaml#/components/schemas/ticket_light"
+              - $ref: "../../index.yaml#/components/responses/simple_paginate"
+          examples:
+            default:
+              summary: "Список с результатами"
+            empty:
+              $ref: "../../index.yaml#/components/examples/simple_paginate_empty"

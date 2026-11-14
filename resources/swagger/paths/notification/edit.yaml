@@ -1,0 +1,28 @@
+get:
+  tags:
+    - Notification
+  summary: "Карточка уведомления (текущий пользователь)"
+  description: "ACL: cabinet - собственные"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "notification_id"
+      in: "path"
+      description: "ID (уведомление)"
+      example: "a81bc81b-dead-4e5d-abff-90865d1e13b1"
+      required: true
+
+#  requestBody:
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  notification:
+                    $ref: "../../index.yaml#/components/schemas/notification_heavy"

@@ -1,0 +1,37 @@
+post:
+  tags:
+    - User
+  summary: "Список пользователей (экспорт)"
+  description: "ACL: аналогичен /user | перечень фильтров и сортировок аналогичен /user"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "X-Timezone"
+      in: "header"
+      description: "Часовой пояс клиента"
+      required: false
+      schema:
+        type: "string"
+        example: "Europe/Moscow"
+
+    - name: "format"
+      in: "path"
+      description: "Формат"
+      required: true
+      schema:
+        type: string
+        enum: [xlsx, csv]
+        example: xlsx
+
+#  requestBody:
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/octet-stream:
+          schema:
+            type: string
+            format: binary
+            example: "<...>"

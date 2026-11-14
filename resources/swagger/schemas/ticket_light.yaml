@@ -1,0 +1,109 @@
+allOf:
+  - description: "Тикет (light)"
+    type: "object"
+    properties:
+      id:
+        description: "ID (тикет)"
+        type: "integer"
+        readOnly: true
+        writeOnly: false
+        example: 10000
+
+      author_id:
+        description: "Автор (ID)"
+        type:
+          - "integer"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: 10005
+
+      moderator_id:
+        description: "Модератор (ID)"
+        type:
+          - "integer"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: 10001
+
+      type:
+        description: "Тип (см. /auth/state -> ticket_types)"
+        type: "string"
+        readOnly: false
+        writeOnly: false
+        example: "user_moderate"
+
+      data_request:
+        description: "Данные запроса"
+        type:
+          - "object"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        properties:
+          message:
+            type: "string"
+            description: "Сообщение (запрос) (type = user_request, guest_request)"
+            example: "Я пополнил счёт, а деньги не пришли!"
+          phone:
+            type: "string"
+            description: "Телефон (type = guest_request)"
+            example: "79000000001"
+          email:
+            type: "string"
+            description: "Email (type = guest_request)"
+            example: "guest@example.com"
+          first_name:
+            type: "string"
+            description: "Имя (type = guest_request)"
+            example: "Иван"
+          last_name:
+            type: "string"
+            description: "Фамилия (type = guest_request)"
+            example: "Петров"
+          middle_name:
+            type: "string"
+            description: "Отчество (type = guest_request)"
+            example: "Иванович"
+
+      status:
+        description: "Статус (см. /auth/state -> ticket_statuses)"
+        type: "string"
+        readOnly: false
+        writeOnly: false
+        example: "new"
+
+      closed_at:
+        description: "Дата закрытия (ISO-8601)"
+        type:
+          - "string"
+          - "null"
+        readOnly: true
+        writeOnly: false
+        example: "2024-07-21T11:21:00.000000Z"
+
+      created_at:
+        description: "Дата добавления (ISO-8601)"
+        type: "string"
+        readOnly: true
+        writeOnly: false
+        example: "2024-07-20T11:21:00.000000Z"
+
+      author:
+        readOnly: true
+        writeOnly: false
+        $ref: "user_light.yaml"
+
+      moderator:
+        readOnly: true
+        writeOnly: false
+        $ref: "user_light.yaml"
+
+      file_virtuals:
+        description: "Файлы"
+        type: "array"
+        readOnly: true
+        writeOnly: false
+        items:
+          $ref: "file_virtual_light.yaml"

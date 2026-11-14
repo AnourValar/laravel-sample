@@ -1,0 +1,19 @@
+description: "Запрос"
+type: "object"
+properties:
+  relation:
+    description: "Фильтр по связанным сущностям"
+    type: "object"
+    properties:
+      fileVirtuals:
+        description: "Файлы"
+        type: "object"
+        properties:
+          min:
+            description: "Минимальное количество"
+            type: "integer"
+            example: 1
+          max:
+            description: "Максимальное количество"
+            type: "integer"
+            example: 2

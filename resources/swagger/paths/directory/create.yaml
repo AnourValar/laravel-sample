@@ -1,0 +1,38 @@
+post:
+  tags:
+    - Directory
+  summary: "Создание справочника"
+  description: "ACL: cabinet - собственные, cabinet.directory.create - все"
+  security:
+    - Bearer: []
+
+#  parameters:
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                directory:
+                  allOf:
+                    - $ref: "../../index.yaml#/components/schemas/directory_heavy"
+                    - required:
+                      - "type"
+                      - "data"
+            - required:
+              - "directory"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  directory:
+                    $ref: "../../index.yaml#/components/responses/id"

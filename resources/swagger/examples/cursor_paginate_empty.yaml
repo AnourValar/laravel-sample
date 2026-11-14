@@ -1,0 +1,9 @@
+summary: "Пустой список"
+value:
+  data: []
+  path: "http://laravel-sample.loc"
+  per_page: 15
+  next_cursor: null
+  next_page_url: null
+  prev_cursor: null
+  prev_page_url: null

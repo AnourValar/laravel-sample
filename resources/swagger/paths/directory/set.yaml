@@ -1,0 +1,66 @@
+post:
+  tags:
+    - Directory
+  summary: "Замена справочников у сущностей (set)"
+  description: "ACL: cabinet - собственные сущности, cabinet.ENTITY.update - все"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "entity"
+      in: "path"
+      description: "Сущность"
+      required: true
+      schema:
+        type: "string"
+        enum:
+          - user
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: "object"
+          properties:
+            ids:
+              description: "ID сущностей"
+              type: "array"
+              items:
+                type: "integer"
+              example:
+                - 10000
+                - 10001
+            tag_ids:
+              description: "ID тегов пользователей (entity = user)"
+              type:
+                - "array"
+                - "null"
+              items:
+                type: "integer"
+              example:
+                - 10002
+                - 10003
+          required:
+            - "ids"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            type: "object"
+            properties:
+              user:
+                type: "object"
+                properties:
+                  ids:
+                    description: "ID обработанных сущностей"
+                    type: "array"
+                    readOnly: true
+                    items:
+                      type: "integer"
+                    example:
+                      - 10000
+                      - 10001

@@ -1,0 +1,95 @@
+type: "object"
+properties:
+  current_page:
+    description: "Текущая страница"
+    type: "integer"
+    example: 1
+
+  first_page_url:
+    description: "Ссылка на первую страницу"
+    type: "string"
+    example: "http://laravel-sample.loc?page=1"
+
+  from:
+    description: "Порядковый номер первого элемента на странице"
+    type:
+      - "integer"
+      - "null"
+    example: 1
+
+  last_page:
+    description: "Последняя страница"
+    type:
+      - "integer"
+      - "null"
+    example: 3
+
+  last_page_url:
+    description: "Ссылка на последнюю страницу"
+    type:
+      - "string"
+      - "null"
+    example: "http://laravel-sample.loc?page=3"
+
+  links:
+    description: "Список страниц"
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        url:
+          description: "Ссылка на страницу"
+          type:
+            - "string"
+            - "null"
+          example: "http://laravel-sample.loc?page=1"
+        label:
+          description: "Метка страницы"
+          type: "string"
+          example: "1"
+        active:
+          description: "Является ли текущей страницей"
+          type: "boolean"
+          example: true
+        page:
+          description: "Страница"
+          type:
+            - "integer"
+            - "null"
+          example: 1
+
+  next_page_url:
+    description: "Ссылка на следующую страницу"
+    type:
+      - "string"
+      - "null"
+    example: "http://laravel-sample.loc?page=2"
+
+  path:
+    description: "Текущий адрес"
+    type: "string"
+    example: "http://laravel-sample.loc"
+
+  per_page:
+    description: "Количество элементов на странице"
+    type: "integer"
+    example: 15
+
+  prev_page_url:
+    description: "Ссылка на предыдущую страницу"
+    type:
+      - "string"
+      - "null"
+    example: null
+
+  to:
+    description: "Порядковый номер последнего элемента на странице"
+    type:
+      - "integer"
+      - "null"
+    example: 15
+
+  total:
+    description: "Всего записей"
+    type: "integer"
+    example: 35

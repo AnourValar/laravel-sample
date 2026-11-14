@@ -1,0 +1,24 @@
+summary: "Пустой список"
+value:
+  current_page: 1
+  data: []
+  first_page_url: "http://laravel-sample.loc?page=1"
+  from: null
+  last_page: 1
+  last_page_url: "http://laravel-sample.loc?page=1"
+  links:
+    - url: null
+      label: "&laquo; Назад"
+      active: false
+    - url: "http://laravel-sample.loc?page=1"
+      label: "1"
+      active: true
+    - url: null
+      label: "Вперёд &raquo;"
+      active: false
+  next_page_url: null
+  path: "http://laravel-sample.loc"
+  per_page: 15
+  prev_page_url: null
+  to: null
+  total: 0

@@ -1,0 +1,45 @@
+post:
+  tags:
+    - Ticket
+  summary: "Создание тикета"
+  description: "ACL: guest - анонимные, cabinet - собственные & анонимные, cabinet.ticket.create - все"
+  security:
+    - Bearer: []
+    - {}
+
+#  parameters:
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                ticket:
+                  allOf:
+                    - $ref: "../../index.yaml#/components/schemas/ticket_heavy"
+                    - properties:
+                        moderator_id:
+                          readOnly: true
+                        data_response:
+                          readOnly: true
+                        status:
+                          readOnly: true
+                    - required:
+                      - "type"
+            - required:
+              - "ticket"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  ticket:
+                    $ref: "../../index.yaml#/components/responses/id"

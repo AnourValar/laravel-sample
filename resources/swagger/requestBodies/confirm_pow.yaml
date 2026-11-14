@@ -1,0 +1,15 @@
+type: "object"
+properties:
+  cryptogram_pow:
+    description: "Криптограмма подтверждения PoW (см. /auth/confirm/pow)"
+    type: "string"
+    example: "eyJpdiI6ImJneTA3bGtTQTFEYnMvV<...>zBhNSIsInRhZyI6IiJ9"
+  puzzle_pow:
+    description: "Расшифрованные значения"
+    type: "array"
+    items:
+      type: "integer"
+      example: 1000
+required:
+  - "cryptogram_pow"
+  - "puzzle_pow"

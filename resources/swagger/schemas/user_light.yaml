@@ -1,0 +1,99 @@
+allOf:
+  - description: "Пользователь (light)"
+    type: "object"
+    properties:
+      id:
+        description: "ID"
+        type: "integer"
+        readOnly: true
+        writeOnly: false
+        example: 1
+
+      pid:
+        description: "Родительский ID"
+        type:
+          - "integer"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: null
+
+      role:
+        description: "Роль"
+        type: "string"
+        readOnly: false
+        writeOnly: false
+        enum:
+          - "client"
+
+      email:
+        description: "Email"
+        type:
+          - "string"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: "foo@example.org"
+
+      phone:
+        description: "Номер телефона"
+        type:
+          - "string"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: "79001234567"
+
+      first_name:
+        description: "Имя"
+        type:
+          - "string"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: "Иван"
+
+      last_name:
+        description: "Фамилия"
+        type:
+          - "string"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: "Иванов"
+
+      middle_name:
+        description: "Отчество"
+        type:
+          - "string"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: "Иванович"
+
+      tag_ids:
+        description: "Теги пользователя (см. /directory -> user_tag)"
+        type:
+          - "array"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        items:
+          type: "integer"
+          example: 10001
+
+      created_at:
+        description: "Дата регистрации (ISO-8601)"
+        type: "string"
+        readOnly: true
+        writeOnly: false
+        example: "2023-06-21T11:15:00.000000Z"
+
+      deleted_at:
+        description: "Дата удаления (ISO-8601)"
+        type:
+          - "string"
+          - "null"
+        readOnly: true
+        writeOnly: false
+        example: null

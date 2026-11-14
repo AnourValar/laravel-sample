@@ -1,0 +1,56 @@
+post:
+  tags:
+    - File
+  summary: "Загрузка файла"
+  description: "ACL: cabinet - собственные, cabinet.ENTITY.update - все"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "entity"
+      in: "path"
+      description: "Сущность"
+      example: "field"
+      required: true
+    - name: "entity_id"
+      in: "path"
+      description: "ID (сущность)"
+      example: "4"
+      required: true
+    - name: "name"
+      in: "path"
+      description: "Техн. название (группа) файла"
+      example: "attachment"
+      required: true
+
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                file:
+                  description: "Файл (документ)"
+                  type: "file"
+#                title:
+#                  description: "Описание"
+#                  type:
+#                    - "string"
+#                    - "null"
+#                  example: "Фотография"
+            - required:
+              - "file"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  file_virtual:
+                    $ref: "../../index.yaml#/components/responses/id"

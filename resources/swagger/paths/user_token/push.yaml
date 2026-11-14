@@ -1,0 +1,39 @@
+post:
+  tags:
+    - User
+  summary: "Присвоение или удаление PUSH-токена (текущий пользователь)"
+  description: "ACL: cabinet - собственные"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "token_id"
+      in: "path"
+      description: "ID (токен)"
+      example: "1"
+      required: true
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                push_token:
+                  description: "PUSH токен (FCM)"
+                  type: "string"
+                  example: "c2aK9KHmw8E:APA91bF7…"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  user_token:
+                    $ref: "../../index.yaml#/components/responses/id"

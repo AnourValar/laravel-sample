@@ -1,0 +1,46 @@
+post:
+  tags:
+    - User
+  summary: "Изменение имени в телеграме"
+  description: "ACL: cabinet - собственный профиль, cabinet.user.update - все"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "user_id"
+      in: "path"
+      description: "ID (пользователь)"
+      example: "10000"
+      required: true
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                user:
+                  type: "object"
+                  properties:
+                    telegram_username:
+                      description: "Имя в телеграме"
+                      type:
+                        - "string"
+                        - "null"
+                      example: "mikepro"
+            - required:
+              - "user"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  user:
+                    $ref: "../../index.yaml#/components/responses/id"

@@ -1,0 +1,17 @@
+description: "Неподдерживаемая версия клиента"
+content:
+  application/json:
+    schema:
+      type: "object"
+      properties:
+        message:
+          description: "Техническое название"
+          type: "string"
+          example: "The client is no longer supported."
+
+        errors:
+          description: "Ключи ошибок"
+          type: "array"
+          items:
+            type: "string"
+          example: []

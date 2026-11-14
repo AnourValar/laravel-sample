@@ -1,0 +1,45 @@
+post:
+  tags:
+    - Directory
+  summary: "Изменение справочника"
+  description: "ACL: cabinet - собственные, cabinet.directory.update - все"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "directory_id"
+      in: "path"
+      description: "ID (справочник)"
+      example: "10000"
+      required: true
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                directory:
+                  allOf:
+                    - $ref: "../../index.yaml#/components/schemas/directory_heavy"
+                    - properties:
+                        user_id:
+                          readOnly: true
+                        type:
+                          readOnly: true
+            - required:
+              - "directory"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  directory:
+                    $ref: "../../index.yaml#/components/responses/id"

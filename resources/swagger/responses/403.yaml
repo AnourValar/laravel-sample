@@ -1,0 +1,31 @@
+description: "Ошибка авторизации"
+content:
+  application/json:
+    schema:
+      type: "object"
+      properties:
+        message:
+          description: "Техническое название"
+          type: "string"
+          example: "This action is unauthorized."
+
+        errors:
+          description: "Ключи ошибок"
+          type: "object"
+          properties:
+            error:
+              type: "array"
+              items:
+                description: "Пользовательские сообщения"
+                type: "string"
+                example: "У вас нет прав для выполнения этого действия."
+    examples:
+      default:
+        summary: "Нет прав"
+      email:
+        summary: "Email не подтверждён"
+        value:
+          message: "Your email address is not verified."
+          errors:
+            error:
+              - "Ваш email адрес не подтверждён."

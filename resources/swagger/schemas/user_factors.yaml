@@ -1,0 +1,47 @@
+allOf:
+  - description: "Доступность факторов"
+    type: "object"
+    properties:
+      email:
+        description: "Фактор email"
+        type:
+          - "object"
+          - "null"
+        properties:
+          mask:
+            description: "Маска значения"
+            type: "string"
+            example: "f****r@example.org"
+          value:
+            description: "Зашифрованное значение [подходит для использования в подтверждениях]"
+            type: "string"
+            example: "eyJpdiI6IjR3NDJqbjZYclBqL<...>sInRhZyI6IiJ9g"
+
+      phone:
+        description: "Фактор телефона"
+        type:
+          - "object"
+          - "null"
+        properties:
+          mask:
+            description: "Маска значения"
+            type: "string"
+            example: "79*******67"
+          value:
+            description: "Зашифрованное значение [подходит для использования в подтверждениях]"
+            type: "string"
+            example: "eyJpdiI6IjR3NDJqbjZYclBqL<...>sInRhZyI6IiJ9g"
+
+      password:
+        description: "Фактор пароля"
+        type:
+          - "bool"
+          - "null"
+        example: true
+
+      totp:
+        description: "Фактор TOTP (одноразовые коды)"
+        type:
+          - "bool"
+          - "null"
+        example: true

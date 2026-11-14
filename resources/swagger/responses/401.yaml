@@ -1,0 +1,17 @@
+description: "Ошибка аутентификации"
+content:
+  application/json:
+    schema:
+      type: "object"
+      properties:
+        message:
+          description: "Техническое название"
+          type: "string"
+          example: "Unauthenticated."
+
+        errors:
+          description: "Ключи ошибок"
+          type: "array"
+          items:
+            type: "string"
+          example: []

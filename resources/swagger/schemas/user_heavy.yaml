@@ -1,0 +1,67 @@
+allOf:
+  - $ref: "user_light.yaml"
+  - description: "Пользователь (heavy)"
+    type: "object"
+    properties:
+      password:
+        description: "Пароль"
+        type:
+          - "string"
+          - "null"
+        readOnly: false
+        writeOnly: true
+        example: "password"
+
+      role_data:
+        description: "Анкета (перечень полей зависит от роли)"
+        type:
+          - "object"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: null
+#        properties:
+#          foo:
+#            description: "Foo [admin]"
+#            type: "number"
+#            example: 3.14
+
+      gender:
+        description: "Пол"
+        type:
+          - "string"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        enum:
+          - "male"
+          - "female"
+
+      birthday:
+        description: "Дата рождения"
+        type:
+          - "string"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: "1990-06-01"
+
+      telegram_username:
+        description: "Имя в телеграме"
+        type:
+          - "string"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: "mikepro"
+
+      additional_abilities:
+        description: "Дополнительные права"
+        type:
+          - "array"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        items:
+          type: "string"
+          example: "cabinet.user.read"

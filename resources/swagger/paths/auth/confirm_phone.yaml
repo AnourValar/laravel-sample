@@ -1,0 +1,45 @@
+post:
+  tags:
+    - Auth
+  summary: "Запрос на подтверждение телефона"
+  description: "Для веб-сервисов, требующих предварительную валидацию телефона"
+#  security:
+#    - Bearer: []
+
+#  parameters:
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: "../../index.yaml#/components/requestBodies/confirm_pow"
+            - type: "object"
+              properties:
+                phone:
+                  description: "Телефон"
+                  type: "string"
+                  example: "79001234567"
+                phone_should_exists:
+                  description: "true - проверка, что телефон зарегистрирован в системе | false - проверка, что телефон не используется в системе"
+                  type:
+                    - "bool"
+                    - "null"
+                  example: null
+            - required:
+              - "phone"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  cryptgoram_phone:
+                    description: "Криптограмма валидации телефона"
+                    type: "string"
+                    example: "eyJpdiI6ImJneTA3bGtTQTFEYnMvV<...>zBhNSIsInRhZyI6IiJ9"

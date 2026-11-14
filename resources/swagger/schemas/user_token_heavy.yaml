@@ -1,0 +1,5 @@
+allOf:
+  - $ref: "user_token_light.yaml"
+  - description: "Токен пользователя (heavy)"
+#    type: "object"
+#    properties:

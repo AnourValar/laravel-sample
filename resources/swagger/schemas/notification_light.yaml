@@ -1,0 +1,60 @@
+allOf:
+  - description: "Уведомление (light)"
+    type: "object"
+    properties:
+      id:
+        description: "ID (уведомление)"
+        type: "string"
+        readOnly: true
+        writeOnly: false
+        example: "a81bc81b-dead-4e5d-abff-90865d1e13b1"
+
+      type:
+        description: "Тип (см. /auth/state -> user_notification_triggers)"
+        type: "string"
+        readOnly: true
+        writeOnly: false
+        example: "user_email_updated"
+
+      data:
+        description: "Карточка"
+        type: "object"
+        readOnly: true
+        writeOnly: false
+        properties:
+          plaintext:
+            description: "Текст уведомления [*]"
+            type: "string"
+            example: "Email пользователя изменён на foo@example.org."
+          user_email:
+            description: "Email пользователя [user_email_updated]"
+            type:
+              - "string"
+              - "null"
+            example: "foo@example.org"
+          user_phone:
+            description: "Телефон пользователя [user_phone_updated]"
+            type:
+              - "string"
+              - "null"
+            example: "79000000001"
+          user_ip:
+            description: "IP адрес [user_logged_in_unique_ip]"
+            type: "string"
+            example: "127.0.0.1"
+
+      read_at:
+        description: "Дата прочтения (ISO-8601)"
+        type:
+          - "string"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: "2024-07-20T11:21:00.000000Z"
+
+      created_at:
+        description: "Дата добавления (ISO-8601)"
+        type: "string"
+        readOnly: true
+        writeOnly: false
+        example: "2024-07-20T11:21:00.000000Z"

@@ -1,0 +1,11 @@
+allOf:
+  - $ref: "directory_light.yaml"
+  - description: "Справочник (heavy)"
+    type: "object"
+    properties:
+      created_at:
+        description: "Дата добавления (ISO-8601)"
+        type: "string"
+        readOnly: true
+        writeOnly: false
+        example: "2024-07-20T11:21:00.000000Z"

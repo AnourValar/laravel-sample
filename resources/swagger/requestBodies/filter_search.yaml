@@ -1,0 +1,15 @@
+description: "Запрос"
+type: "object"
+properties:
+  filter:
+    description: "Фильтры"
+    type: "object"
+    properties:
+      search:
+        description: 'Поле "Поиск"'
+        type: "object"
+        properties:
+          search:
+            description: 'Операция "search"'
+            type: "string"
+            example: "Foo"

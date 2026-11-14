@@ -1,0 +1,24 @@
+post:
+  tags:
+    - Notification
+  summary: "Фиксация прочтения всех уведомлений (текущий пользователь)"
+  description: "ACL: cabinet - собственные"
+  security:
+    - Bearer: []
+
+#  parameters:
+
+#  requestBody:
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  notifications:
+                    type: "boolean"
+                    example: true

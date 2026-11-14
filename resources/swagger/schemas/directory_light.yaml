@@ -1,0 +1,47 @@
+allOf:
+  - description: "Справочник (light)"
+    type: "object"
+    properties:
+      id:
+        description: "ID (справочник)"
+        type: "integer"
+        readOnly: true
+        writeOnly: false
+        example: 10000
+
+      type:
+        description: "Тип (см. /auth/state -> directory_types)"
+        type: "string"
+        readOnly: false
+        writeOnly: false
+        example: "user_tag"
+
+      user_id:
+        description: "Клиент (ID)"
+        type:
+          - "integer"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: 10001
+
+      data:
+        description: "Карточка"
+        type: "object"
+        readOnly: false
+        writeOnly: false
+        properties:
+          title:
+            description: "Название [type = user_tag]"
+            type: "string"
+            example: "МСК"
+          color:
+            description: "Цвет [type = user_tag]"
+            type: "string"
+            example: "#FF0000"
+          description:
+            description: "Описание [type = user_tag]"
+            type:
+              - "string"
+              - "null"
+            example: "Проживает в Москве"

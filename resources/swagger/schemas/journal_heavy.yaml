@@ -1,0 +1,120 @@
+allOf:
+  - description: "Журнал (лог) (heavy)"
+    type: "object"
+    properties:
+      id:
+        description: "ID (журнал)"
+        type: "integer"
+        readOnly: true
+        writeOnly: false
+        example: 1
+
+      ip_address:
+        description: "IP адрес (инициатора)"
+        type:
+          - "string"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: "127.0.0.1"
+
+      entity:
+        description: "Сущность (см. /auth/state -> journal_entities)"
+        type:
+          - "string"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        example: "user"
+
+      type:
+        description: "Тип"
+        type: "string"
+        readOnly: false
+        writeOnly: false
+        enum:
+          - "model"
+          - "integration"
+          - "metric"
+
+      event:
+        description: "Событие (см. /auth/state -> journal_events)"
+        type: "string"
+        readOnly: false
+        writeOnly: false
+        example: "user_token_obtain"
+
+      success:
+        description: "Успешность"
+        type: "boolean"
+        readOnly: false
+        writeOnly: false
+        example: true
+
+      tags:
+        description: "Теги"
+        type:
+          - "array"
+          - "null"
+        items:
+          description: "Тег"
+          type: "string"
+          example: "abc123"
+        readOnly: false
+        writeOnly: false
+
+      created_at:
+        description: "Дата регистрации (ISO-8601)"
+        type: "string"
+        readOnly: true
+        writeOnly: false
+        example: "2023-06-21T11:15:00.000000Z"
+
+      entity_title:
+        description: "Название сущности"
+        type:
+          - "string"
+          - "null"
+        readOnly: true
+        writeOnly: false
+        example: "Пользователь"
+
+      type_title:
+        description: "Название типа"
+        type: "string"
+        readOnly: true
+        writeOnly: false
+        example: "Метрика"
+
+      event_title:
+        description: "Название события"
+        type: "string"
+        readOnly: true
+        writeOnly: false
+        example: "Аутентификация (токен)"
+
+      short_description:
+        description: "Короткое описание деталий события"
+        type:
+          - "string"
+          - "null"
+        readOnly: true
+        writeOnly: false
+        example: "Изменение поля"
+
+      full_description:
+        description: "Полное описание деталий события"
+        type:
+          - "string"
+          - "null"
+        readOnly: true
+        writeOnly: false
+        example: "<div class='red'>Имя: Пётр</div><div class='green'>Имя: Иван</div>"
+
+      user:
+        allOf:
+          - description: "Пользователь (инициатор)"
+            type:
+              - "object"
+              - "null"
+          - $ref: "user_light.yaml"

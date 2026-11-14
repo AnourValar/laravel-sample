@@ -1,0 +1,35 @@
+post:
+  tags:
+    - Auth
+  summary: "Запрос на подтверждение PoW"
+  description: "Для веб-сервисов, требующих предварительную валидацию Proof-of-Work"
+#  security:
+#    - Bearer: []
+
+#  parameters:
+
+#  requestBody:
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  salt:
+                    description: "Случайная строка ('соль') хэширования"
+                    type: "string"
+                    example: "cf87c281bba61c846f1c68ec2b2f5ca3"
+                  cryptogram_pow:
+                    description: "Криптограмма PoW-запроса"
+                    type: "string"
+                    example: "NmYjI2NzA1NDI4ODk4MWIxOGJkMjcwZTI4NWVlZjg5NzI5ZDBkYSIsInRhZyI6IiJ9"
+                  puzzle_pow:
+                    description: "Зашифрованные (хэшированные) значения пазла sha256(salt + integer[от 0 до N])"
+                    type: "array"
+                    items:
+                      type: "string"
+                      example: "b063ebd46140ef3bb00aaa7cff411f75fa0fe358412f29afaad13a299d929f8e"

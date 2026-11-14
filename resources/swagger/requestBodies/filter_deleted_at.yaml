@@ -1,0 +1,15 @@
+description: "Запрос"
+type: "object"
+properties:
+  filter:
+    description: "Фильтры"
+    type: "object"
+    properties:
+      deleted_at:
+        description: 'Поле "Дата удаления"'
+        type: "object"
+        properties:
+          "is-null":
+            description: 'Операция "Является NULL"'
+            type: "bool"
+            example: true

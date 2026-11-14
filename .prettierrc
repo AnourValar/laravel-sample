@@ -1,0 +1,24 @@
+{
+  "plugins": ["@shufo/prettier-plugin-blade"],
+  "overrides": [
+    {
+      "files": ["*.blade.php"],
+      "options": {
+        "parser": "blade",
+        "tabWidth": 2,
+        "printWidth": 1200,
+        "wrapAttributes": "force-expand-multiline",
+        "wrapAttributesMinAttrs": 4
+      }
+    }
+  ],
+  "endOfLine": "lf",
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": true,
+  "quoteProps": "as-needed",
+  "bracketSpacing": false,
+  "arrowParens": "always",
+  "printWidth": 120
+}

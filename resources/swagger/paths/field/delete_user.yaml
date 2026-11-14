@@ -1,0 +1,33 @@
+post:
+  tags:
+    - Field
+  summary: "Удаление поля"
+  description: "ACL: cabinet - собственные"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "name"
+      in: "path"
+      description: "Техн. название (идентификатор) поля"
+      example: "profile_form"
+      required: true
+    - name: "user_id"
+      in: "path"
+      description: "ID (пользователь)"
+      example: "10000"
+      required: true
+
+#  requestBody:
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  field:
+                    $ref: "../../index.yaml#/components/responses/id"

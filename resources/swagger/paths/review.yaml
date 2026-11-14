@@ -1,0 +1,67 @@
+get:
+  tags:
+    - "*"
+  summary: "Заголовки & клиентские ошибки"
+  description: "" # | Precognition
+  security:
+  parameters:
+#    - name: "Precognition"
+#      in: "header"
+#      description: "Вызов веб-сервиса в режиме валидации (Laravel Precognition)"
+#      required: false
+#      schema:
+#        type: "string"
+#        enum:
+#          - true
+
+#    - name: "X-Api-Restrict"
+#      in: "header"
+#      description: "Поддерживаемая (мажорная) версия API"
+#      required: false
+#      schema:
+#        type: "string"
+#        example: "v1"
+
+    - name: "Accept-Language"
+      in: "header"
+      description: "Язык (локаль)"
+      required: false
+      schema:
+        type: "string"
+        enum:
+          - "ru"
+          - "en"
+
+    - name: "X-Timezone"
+      in: "header"
+      description: "Часовой пояс клиента"
+      required: false
+      schema:
+        type: "string"
+        example: "Europe/Moscow"
+
+    - name: "Authorization"
+      in: "header"
+      description: "Токен пользователя (аутентификация)"
+      required: false
+      schema:
+        type: "string"
+        example: "Bearer <token>"
+
+#  requestBody:
+
+  responses:
+#    400:
+#      $ref: "../index.yaml#/components/responses/400"
+    401:
+      $ref: "../index.yaml#/components/responses/401"
+    403:
+      $ref: "../index.yaml#/components/responses/403"
+    404:
+      $ref: "../index.yaml#/components/responses/404"
+    405:
+      $ref: "../index.yaml#/components/responses/405"
+    422:
+      $ref: "../index.yaml#/components/responses/422"
+    429:
+      $ref: "../index.yaml#/components/responses/429"

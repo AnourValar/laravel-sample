@@ -1,0 +1,7 @@
+*.json
+
+**/json
+**/swagger
+
+**/views/notifications
+**/views/markdown

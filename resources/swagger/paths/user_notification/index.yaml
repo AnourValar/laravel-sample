@@ -1,0 +1,32 @@
+get:
+  tags:
+    - User
+  summary: "Список настроек уведомлений пользователя"
+  description: "ACL: cabinet - собственные настройки, cabinet.user.read - все"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "user_id"
+      in: "path"
+      description: "ID (пользователь)"
+      example: "10000"
+      required: true
+
+#  requestBody:
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  data:
+                    type: "array"
+                    description: "Список"
+                    items:
+                      allOf:
+                        - $ref: "../../index.yaml#/components/schemas/user_notification_light"

@@ -1,0 +1,59 @@
+post:
+  tags:
+    - User
+  summary: "Изменение телефона"
+  description: "ACL: cabinet - собственный профиль, cabinet.user.update - все | FA: 1 [кроме session]"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "user_id"
+      in: "path"
+      description: "ID (пользователь)"
+      example: "10000"
+      required: true
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                cryptogram_new_phone:
+                  description: "Криптограмма валидации нового телефона (см. /auth/confirm/phone)"
+                  type: "string"
+                  example: "eyJpdiI6ImJneTA3bGtTQTFEYnMvV<...>zBhNSIsInRhZyI6IiJ9"
+                code_new_phone:
+                  description: "Код подтверждения (отправленный на телефон)"
+                  type: "string"
+                  example: "fM328nqnj2411zB"
+                cryptograms_fa:
+                  description: "Криптограммы факторов (см. /auth/fa/*)"
+                  example:
+                    - "eyJpdiI6ImRNM3F6K2R1ZzRVODJtbmlOY2tBUFE9<...>GNhZTk2NzkzOTEyNGU0ZWZkODRmZGZhY2ZiZmE3OSIsInRhZyI6IiJ9"
+                user:
+                  type: "object"
+                  properties:
+                    phone:
+                      description: "Телефон"
+                      type: "string"
+                      example: "79000000001"
+            - required:
+              - "cryptogram_new_phone"
+              - "code_new_phone"
+              - "cryptograms_fa"
+              - "user"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  user:
+                    $ref: "../../index.yaml#/components/responses/id"

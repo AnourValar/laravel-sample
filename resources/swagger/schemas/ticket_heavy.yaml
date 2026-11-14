@@ -1,0 +1,23 @@
+allOf:
+  - $ref: "ticket_light.yaml"
+  - description: "Тикет (heavy)"
+    type: "object"
+    properties:
+      data_response:
+        description: "Данные ответа"
+        type:
+          - "object"
+          - "null"
+        readOnly: false
+        writeOnly: false
+        properties:
+          fields:
+            type: "object"
+            description: "Ошибки полей (type = user_moderate)"
+            example:
+              personal_basic_full_name: "Некорректное имя"
+              personal_basic_birthday: "Некорректная дата рождения"
+          message:
+            type: "string"
+            description: "Сообщение (ответ) (type = user_request)"
+            example: "Зачисление происходит в течение 3 раб. суток"

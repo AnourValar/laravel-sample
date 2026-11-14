@@ -1,0 +1,33 @@
+post:
+  tags:
+    - User
+  summary: "Генерация TOTP-сессии в кандидаты"
+  description: "ACL: cabinet"
+  security:
+    - Bearer: []
+
+#  parameters:
+
+#  requestBody:
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  secret:
+                    description: "Ключ для добавления в TOTP-клиент"
+                    type: "string"
+                    example: "SZPWE7KDNKOESPV2IBMY57CZDDEJI5ZS"
+                  secret_url:
+                    description: "URL для добавления в TOTP-клиент (QR code friendly)"
+                    type: "string"
+                    example: "otpauth://totp/Foo:79000000000?secret=SZPWE7KDNKOESPV2IBMY57CZDDEJI5ZS&algorithm=SHA1&digits=6&period=30"
+                  cryptogram_totp:
+                    description: "Криптограмма для привязки TOTP-сессии к пользователю"
+                    type: "string"
+                    example: "eyJpdiI6IkZFeHNlRXR<...>ZTUyNjEwZTU4ZTRlMzA0MSIsInRhZyI6IiJ9"

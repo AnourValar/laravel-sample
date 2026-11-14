@@ -1,0 +1,17 @@
+description: "Запрос"
+type: "object"
+properties:
+  filter:
+    description: "Фильтры"
+    type: "object"
+    properties:
+      id:
+        description: 'Поле "ID"'
+        type: "object"
+        properties:
+          in:
+            description: 'Операция "входит в список"'
+            type: "array"
+            items:
+              type: "integer"
+            example: [1]

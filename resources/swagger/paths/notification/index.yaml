@@ -1,0 +1,82 @@
+post:
+  tags:
+    - Notification
+  summary: "Список уведомлений (текущий пользователь)"
+  description: "ACL: cabinet - собственные"
+  security:
+    - Bearer: []
+
+#  parameters:
+
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: "../../index.yaml#/components/requestBodies/cursor"
+            - $ref: "../../index.yaml#/components/requestBodies/per_page"
+            - $ref: "../../index.yaml#/components/requestBodies/sort_id"
+            - type: "object"
+              properties:
+                filter:
+                  description: "Фильтры"
+                  type: "object"
+                  properties:
+                    type:
+                      description: 'Поле "Тип"'
+                      type: "object"
+                      properties:
+                        "in":
+                          description: 'Операция "входит в список"'
+                          type: "array"
+                          items:
+                            type: "string"
+                            example: "user_email_updated"
+                    read_at:
+                      description: 'Поле "Дата прочтения"'
+                      type: "object"
+                      properties:
+                        "is-null":
+                          description: 'Операция "не заполнено"'
+                          type: "bool"
+                          example: true
+
+                sort:
+                  description: "Сортировка"
+                  type: "object"
+                  properties:
+                    created_at:
+                      description: 'Поле "Дата создания"'
+                      type: "string"
+                      enum:
+                        - ASC
+                        - DESC
+
+        examples:
+          default:
+            summary: "Все параметры"
+          empty:
+            summary: "Без параметров"
+            value: "[]"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  data:
+                    type: "array"
+                    description: "Список"
+                    items:
+                      allOf:
+                        - $ref: "../../index.yaml#/components/schemas/notification_light"
+              - $ref: "../../index.yaml#/components/responses/cursor_paginate"
+          examples:
+            default:
+              summary: "Список с результатами"
+            empty:
+              $ref: "../../index.yaml#/components/examples/cursor_paginate_empty"

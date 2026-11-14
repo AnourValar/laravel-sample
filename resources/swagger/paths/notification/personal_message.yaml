@@ -1,0 +1,41 @@
+post:
+  tags:
+    - Notification
+  summary: "Отправка персонального уведомления (сообщения)"
+  description: "ACL: cabinet.user.notify"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "user_id"
+      in: "path"
+      description: "ID (пользователь)"
+      example: "10000"
+      required: true
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                message:
+                  description: "Текст уведомления"
+                  type: "string"
+                  example: "Ваш аккаунт активирован и полностью готов к работе."
+            - required:
+              - "message"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  user:
+                    $ref: "../../index.yaml#/components/responses/id"

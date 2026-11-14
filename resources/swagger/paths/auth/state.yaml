@@ -1,0 +1,211 @@
+get:
+  tags:
+    - Auth
+  summary: "Получение данных по аутентифицированному пользователю и конфигурацию приложения"
+  description: ""
+  security:
+    - Bearer: []
+
+#  parameters:
+
+#  requestBody:
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  current_token_id:
+                    description: "ID текущего токена"
+                    type: "integer"
+                    example: 100
+
+                  current_token_abilities:
+                    description: "Права текущего токена"
+                    type: "array"
+                    items:
+                      type: "string"
+                      example: "*"
+
+                  user:
+                    allOf:
+                      - $ref: "../../index.yaml#/components/schemas/user_heavy"
+
+                  user_roles:
+                    description: "Справочник ролей пользователей"
+                    type: "object"
+                    properties:
+                      client:
+                        description: "Роль"
+                        type: "object"
+                        properties:
+                          title:
+                            description: "Название"
+                            type: "string"
+                            example: "Клиент"
+
+                  user_factors:
+                    $ref: "../../index.yaml#/components/schemas/user_factors"
+
+                  current_abilities:
+                    description: "Список прав текущего пользователя"
+                    type: "array"
+                    items:
+                      description: "Название права"
+                      type: "string"
+                      enum:
+                        - "cabinet"
+                        - "admin.administration"
+
+                  user_notification_triggers:
+                    description: "Справочник уведомлений (триггеров)"
+                    type: "object"
+                    properties:
+                      user_email_updated:
+                        description: "Уведомление (триггер)"
+                        type: "object"
+                        properties:
+                          title:
+                            description: "Название"
+                            type: "string"
+                            example: "Изменён email"
+                          channels:
+                            description: "Доступные каналы"
+                            type: "array"
+                            example:
+                              - "sms"
+                          optgroup:
+                            description: "Группа"
+                            type: "string"
+                            example: "Профиль"
+                          ui:
+                            description: "UI-группа"
+                            type: "string"
+                            enum:
+                              - "readonly"
+                        required:
+                          - "title"
+                          - "channels"
+                          - "optgroup"
+
+                  user_notification_channels:
+                    description: "Справочник каналов уведомлений"
+                    type: "object"
+                    properties:
+                      database:
+                        description: "Канал"
+                        type: "string"
+                        example: "ЛК"
+
+                  field_statuses:
+                    description: "Справочник статусов полей"
+                    type: "object"
+                    properties:
+                      draft:
+                        description: "Статус"
+                        type: "object"
+                        properties:
+                          title:
+                            description: "Название"
+                            type: "string"
+                            example: "Черновик"
+
+                  directory_types:
+                    description: "Справочник типов справочников"
+                    type: "object"
+                    properties:
+                      user_tag:
+                        description: "Тип"
+                        type: "object"
+                        properties:
+                          title:
+                            description: "Название"
+                            type: "string"
+                            example: "Тег пользователя"
+                          is_manually:
+                            description: "Изменяется через UI"
+                            type: "boolean"
+                            example: true
+
+                  ticket_types:
+                    description: "Справочник типов тикетов"
+                    type: "object"
+                    properties:
+                      user_moderate:
+                        description: "Тип"
+                        type: "object"
+                        properties:
+                          title:
+                            description: "Название"
+                            type: "string"
+                            example: "Модерация пользователя"
+                          options:
+                            description: "Опции"
+                            type: "object"
+                            properties:
+                              fields:
+                                description: "Поля (type = user_moderate)"
+                                type: "array"
+                                example:
+                                  - "profile_form"
+
+                  ticket_statuses:
+                    description: "Справочник статусов тикетов"
+                    type: "object"
+                    properties:
+                      new:
+                        description: "Статус"
+                        type: "object"
+                        properties:
+                          title:
+                            description: "Название"
+                            type: "string"
+                            example: "Новый"
+                          ui:
+                            description: "UI группа"
+                            type: "string"
+                            example: "success"
+
+                  journal_entites:
+                    description: "Справочник сущностей журнала (логирования)"
+                    type: "object"
+                    properties:
+                      user:
+                        description: "Сущность"
+                        type: "object"
+                        properties:
+                          title:
+                            description: "Название"
+                            type: "string"
+                            example: "Пользователь"
+
+                  journal_events:
+                    description: "Справочник событий журнала (логирования)"
+                    type: "object"
+                    properties:
+                      create:
+                        description: "Событие"
+                        type: "object"
+                        properties:
+                          title:
+                            description: "Название"
+                            type: "string"
+                            example: "Создание"
+                          optgroup:
+                            description: "Группа"
+                            type: "string"
+                            example: "Модель"
+
+                  telegram_bot_name:
+                    description: "Имя telegram бота"
+                    type: "string"
+                    example: "NotificationBot"
+
+                  number_multiple:
+                    description: "Multiple encode множитель"
+                    type: "integer"
+                    example: 100

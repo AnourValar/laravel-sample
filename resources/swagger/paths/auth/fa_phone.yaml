@@ -1,0 +1,43 @@
+post:
+  tags:
+    - Auth
+  summary: "FA: подтверждение телефона"
+  description: ""
+#  security:
+#    - Bearer: []
+
+#  parameters:
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: "../../index.yaml#/components/requestBodies/confirm_phone"
+            - type: "object"
+              properties:
+                phone:
+                  description: "Телефон"
+                  type: "string"
+                  example: "79001234567"
+            - required:
+              - "cryptogram_phone"
+              - "code_phone"
+              - "phone"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  cryptogram_fa:
+                    description: "Криптограмма фактора"
+                    type: "string"
+                    example: "eyJpdiI6ImJneTA3bGtTQTFEYnMvV<...>zBhNSIsInRhZyI6IiJ9"
+                  factors:
+                    $ref: "../../index.yaml#/components/schemas/user_factors"

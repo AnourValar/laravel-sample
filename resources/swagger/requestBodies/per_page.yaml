@@ -1,0 +1,6 @@
+type: "object"
+properties:
+  per_page:
+    description: "Кол-во элементов на странице"
+    type: "integer"
+    example: 15

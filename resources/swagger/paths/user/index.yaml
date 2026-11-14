@@ -1,0 +1,93 @@
+post:
+  tags:
+    - User
+  summary: "Список пользователей"
+  description: "ACL: cabinet - собственный профиль, cabinet.user.read - все"
+  security:
+    - Bearer: []
+
+#  parameters:
+
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: "../../index.yaml#/components/requestBodies/page"
+            - $ref: "../../index.yaml#/components/requestBodies/per_page"
+            - $ref: "../../index.yaml#/components/requestBodies/filter_search"
+            - $ref: "../../index.yaml#/components/requestBodies/filter_created_at"
+            - $ref: "../../index.yaml#/components/requestBodies/filter_deleted_at"
+            - $ref: "../../index.yaml#/components/requestBodies/sort_id"
+            - $ref: "../../index.yaml#/components/requestBodies/sort_deleted_at"
+            - type: "object"
+              properties:
+                filter:
+                  description: "Фильтры"
+                  type: "object"
+                  properties:
+                    pid:
+                      description: 'Поле "Родительский пользователь"'
+                      type: "object"
+                      properties:
+                        "in":
+                          description: 'Операция "входит в список"'
+                          type: "array"
+                          items:
+                            type: "integer"
+                            example: 10000
+                    role:
+                      description: 'Поле "Роль"'
+                      type: "object"
+                      properties:
+                        "in":
+                          description: 'Операция "входит в список"'
+                          type: "array"
+                          items:
+                            type: "string"
+                            example: "client"
+                    tag_ids:
+                      description: 'Поле "Теги пользователя"'
+                      type: "object"
+                      properties:
+                        "json-in":
+                          description: 'Операция "входит в JSON (хотя бы один из элементов)"'
+                          type: "array"
+                          items:
+                            type: "integer"
+                            example: 10000
+                        "json-contains":
+                          description: 'Операция "входит в JSON (все элементы сразу)"'
+                          type: "array"
+                          items:
+                            type: "integer"
+                            example: 10000
+
+        examples:
+          default:
+            summary: "Все параметры"
+          empty:
+            summary: "Без параметров"
+            value: "[]"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  data:
+                    type: "array"
+                    description: "Список"
+                    items:
+                      allOf:
+                        - $ref: "../../index.yaml#/components/schemas/user_light"
+              - $ref: "../../index.yaml#/components/responses/simple_paginate"
+          examples:
+            default:
+              summary: "Список с результатами"
+            empty:
+              $ref: "../../index.yaml#/components/examples/simple_paginate_empty"

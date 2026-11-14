@@ -1,0 +1,13 @@
+type: "object"
+properties:
+  cryptogram_email:
+    description: "Криптограмма подтверждения email (см. /auth/confirm/email)"
+    type: "string"
+    example: "eyJpdiI6ImJneTA3bGtTQTFEYnMvV<...>zBhNSIsInRhZyI6IiJ9"
+  code_email:
+    description: "Код подтверждения (отправленный на email)"
+    type: "string"
+    example: "fM328nqnj2411zB"
+required:
+  - "cryptogram_email"
+  - "code_email"

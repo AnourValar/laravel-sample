@@ -1,0 +1,70 @@
+get:
+  tags:
+    - Field
+  summary: "Список полей (схема со значениями)"
+  description: "ACL: cabinet - собственные, cabinet.user.read - все"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "user_id"
+      in: "path"
+      description: "ID (пользователь)"
+      example: "10000"
+      required: true
+
+#  requestBody:
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            type: "array"
+            description: "Список полей"
+            items:
+              type: "object"
+              description: "Поле"
+              properties:
+                name:
+                  type: "string"
+                  description: "Техн. название (идентификатор) поля"
+                  example: "profile_form"
+                title:
+                  type: "string"
+                  description: "Название поля"
+                  example: "Правовая форма"
+                ui:
+                  type: "array"
+                  description: "UI-группы (для отрисовки)"
+                  items:
+                    type: "string"
+                    description: "UI-группа"
+                    enum:
+                      - "widget:fio"
+                      - "widget:text"
+                      - "widget:date"
+                      - "widget:integer"
+                      - "widget:select"
+                      - "widget:multi_select"
+                      - "widget:regexp"
+                      - "widget:ru_inn"
+                      - "widget:ru_kpp"
+                      - "widget:file"
+                      - "screen:profile"
+                options:
+                  type: "object"
+                  description: "Опции поля (см. структуру полей)"
+                  example:
+                    values:
+                      foo:
+                        title: "Значение 1"
+                      bar:
+                        title: "Значение 2"
+                field:
+                  allOf:
+                    - $ref: "../../index.yaml#/components/schemas/field_light"
+                    - type:
+                      - "object"
+                      - "null"

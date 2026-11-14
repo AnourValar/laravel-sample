@@ -1,0 +1,55 @@
+post:
+  tags:
+    - User
+  summary: "Изменение пользователя"
+  description: "ACL: cabinet - собственный профиль [ограниченный набор полей], cabinet.user.update - все"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "user_id"
+      in: "path"
+      description: "ID (пользователь)"
+      example: "10000"
+      required: true
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                user:
+                  allOf:
+                    - $ref: "../../index.yaml#/components/schemas/user_heavy"
+                    - properties:
+                        pid:
+                          readOnly: true
+                        email:
+                          readOnly: true
+                        phone:
+                          readOnly: true
+                        password:
+                          readOnly: true
+                        telegram_username:
+                          readOnly: true
+                        additional_abilities:
+                          readOnly: true
+                        tag_ids:
+                          readOnly: true
+            - required:
+              - "user"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  user:
+                    $ref: "../../index.yaml#/components/responses/id"

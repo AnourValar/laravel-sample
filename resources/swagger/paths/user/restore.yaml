@@ -1,0 +1,28 @@
+post:
+  tags:
+    - User
+  summary: "Восстановление пользователя"
+  description: "ACL: cabinet.user.delete - все"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "user_id"
+      in: "path"
+      description: "ID (пользователь)"
+      example: "10000"
+      required: true
+
+#  requestBody:
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  user:
+                    $ref: "../../index.yaml#/components/responses/id"

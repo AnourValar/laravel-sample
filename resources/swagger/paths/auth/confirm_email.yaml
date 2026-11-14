@@ -1,0 +1,45 @@
+post:
+  tags:
+    - Auth
+  summary: "Запрос на подтверждение email"
+  description: "Для веб-сервисов, требующих предварительную валидацию email"
+#  security:
+#    - Bearer: []
+
+#  parameters:
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+#            - $ref: "../../index.yaml#/components/requestBodies/confirm_pow"
+            - type: "object"
+              properties:
+                email:
+                  description: "Email"
+                  type: "string"
+                  example: "foo@example.org"
+                email_should_exists:
+                  description: "true - проверка, что email зарегистрирован в системе | false - проверка, что email не используется в системе"
+                  type:
+                    - "bool"
+                    - "null"
+                  example: null
+            - required:
+              - "email"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  cryptgoram_email:
+                    description: "Криптограмма валидации email"
+                    type: "string"
+                    example: "eyJpdiI6ImJneTA3bGtTQTFEYnMvV<...>zBhNSIsInRhZyI6IiJ9"

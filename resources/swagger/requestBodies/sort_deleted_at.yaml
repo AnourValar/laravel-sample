@@ -1,0 +1,14 @@
+description: "Запрос"
+type: "object"
+properties:
+  sort:
+    description: "Сортировка"
+    type: "object"
+    properties:
+      deleted_at:
+        description: 'Поле "Дата удаления"'
+        type: "string"
+        enum:
+          - ASC
+          - DESC
+        example: "DESC"

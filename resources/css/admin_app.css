@@ -1,0 +1,218 @@
+form {
+  display: inline;
+}
+
+.underline {
+  text-decoration: underline;
+}
+.line-through {
+  text-decoration: line-through;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.xdsoft_datetimepicker .xdsoft_label > .xdsoft_select.xdsoft_monthselect {
+  right: -7px;
+}
+.xdsoft_datetimepicker .xdsoft_label > .xdsoft_select.xdsoft_yearselect {
+  right: 2px;
+}
+.xdsoft_datetimepicker .xdsoft_label > .xdsoft_select > div > .xdsoft_option:hover {
+  background: #33aaff !important;
+}
+.xdsoft_datetimepicker .xdsoft_calendar td:hover,
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box > div > div:hover {
+  background: #33aaff !important;
+}
+
+.select2-selection__rendered {
+  white-space: normal !important;
+  height: inherit !important;
+}
+.select2-container .select2-selection--multiple .select2-search__field:not([placeholder='']) {
+  width: 100% !important;
+}
+
+.select2-selection__rendered,
+.select2-results__option {
+  padding-left: 0.75rem !important;
+}
+
+.note-editor.note-frame {
+  margin-bottom: 0px !important;
+}
+
+.custom-file-input:lang(ru) ~ .custom-file-label::after {
+  content: 'Обзор';
+}
+
+.error-breadcrumb-light {
+  border: 1px solid #dc3545 !important;
+}
+
+.select2-container--bootstrap4 .select2-results > .select2-results__options {
+  max-height: 25em;
+}
+
+.pt-0-row td {
+  padding-top: 0px;
+}
+.pb-0-row td {
+  padding-bottom: 0px;
+}
+
+.table-unbordered td {
+  border: 0px !important;
+}
+
+.select-medium option {
+  font-size: 110%;
+}
+.select-large option {
+  font-size: 120%;
+}
+
+pre {
+  padding: 0px !important;
+}
+
+/* vue transition */
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* .is-invalid fixes */
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+  border-color: #dc3545 !important;
+}
+
+/* form */
+.form-row + .form-row {
+  margin-top: 15px;
+}
+
+/* layout */
+.fade-in {
+  opacity: 0;
+}
+
+/* shadow features */
+.shadow-black {
+  text-shadow: 0 0 3px #000;
+}
+
+/* padding */
+.pt-05 {
+  padding-top: 0.1rem;
+}
+
+/* tooltip */
+.tooltip-inner {
+  max-width: 350px;
+}
+
+/* select2 */
+select.select2bs4,
+select.select2bs4-autocomplete {
+  display: none !important;
+}
+
+/* vue features */
+[v-cloak] {
+  display: none;
+}
+
+/* collapse */
+[aria-expanded='false'] .collapse-true {
+  display: none;
+}
+[aria-expanded='true'] .collapse-false {
+  display: none;
+}
+
+/* required mark */
+label.required:after {
+  content: '*';
+  color: red;
+}
+label.sometimes-required:after {
+  content: '*';
+  color: #1953ff;
+}
+
+/* table */
+.table-inherit tr:not(:hover) {
+  background-color: inherit !important;
+}
+
+/* modal */
+.modal-xxl {
+  max-width: 95%;
+}
+
+/* text */
+.text-normal {
+  font-weight: normal !important;
+}
+
+/* toastr */
+#toast-container > div {
+  opacity: 0.95 !important;
+}
+
+/* table-page */
+.table-page .card-body {
+  padding: 0px;
+}
+.table-page table th:first-child,
+.table-page table td:first-child {
+  text-align: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.table-page table th:last-child,
+.table-page table td:last-child {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+/* textarea */
+.borderless {
+  border: 0px;
+  outline: none;
+  background-color: inherit !important;
+}
+
+/* summernote */
+.note-modal .note-group-select-from-files {
+  display: none;
+}
+
+/* Special */
+
+/* layout */
+.navbar-fixed {
+  right: 0;
+  float: none;
+  left: 0;
+  position: fixed;
+  top: 0;
+}
+.menu-open {
+  font-weight: bold;
+}
+.nav-link.active:hover {
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+.nav-link.active {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.w-first-220 td:first-child {
+  width: 220px;
+}

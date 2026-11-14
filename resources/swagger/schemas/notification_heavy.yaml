@@ -1,0 +1,5 @@
+allOf:
+  - $ref: "notification_light.yaml"
+  - description: "Уведомление (heavy)"
+#    type: "object"
+#    properties:

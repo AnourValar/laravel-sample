@@ -1,0 +1,17 @@
+description: "Неподдерживаемый метод запроса"
+content:
+  application/json:
+    schema:
+      type: "object"
+      properties:
+        message:
+          description: "Техническое название"
+          type: "string"
+          example: "The POST method is not supported for this route. Supported methods: DELETE."
+
+        errors:
+          description: "Ключи ошибок"
+          type: "array"
+          items:
+            type: "string"
+          example: []

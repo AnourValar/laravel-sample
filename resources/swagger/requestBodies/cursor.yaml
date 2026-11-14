@@ -1,0 +1,6 @@
+type: "object"
+properties:
+  cursor:
+    description: "Курсор страницы"
+    type: "string"
+    example: "eyJpZCI6MTkxLCJfcG9pbnRzVG9OZXh0SXRlbXMiOmZhbHNlfQ"

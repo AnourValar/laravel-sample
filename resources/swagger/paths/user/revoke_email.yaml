@@ -1,0 +1,41 @@
+post:
+  tags:
+    - User
+  summary: "Удаление email"
+  description: "ACL: cabinet - собственный профиль, cabinet.user.update - все | FA: 1 [кроме session]"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "user_id"
+      in: "path"
+      description: "ID (пользователь)"
+      example: "10000"
+      required: true
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                cryptograms_fa:
+                  description: "Криптограммы факторов (см. /auth/fa/*)"
+                  example:
+                    - "eyJpdiI6ImRNM3F6K2R1ZzRVODJtbmlOY2tBUFE9<...>GNhZTk2NzkzOTEyNGU0ZWZkODRmZGZhY2ZiZmE3OSIsInRhZyI6IiJ9"
+            - required:
+              - "cryptograms_fa"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  user:
+                    $ref: "../../index.yaml#/components/responses/id"

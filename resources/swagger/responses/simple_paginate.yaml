@@ -1,0 +1,54 @@
+type: "object"
+properties:
+  current_page:
+    description: "Текущая страница"
+    type: "integer"
+    example: 1
+
+  current_page_url:
+    description: "Ссылка на текущую страницу"
+    type: "string"
+    example: "http://laravel-sample.loc?page=1"
+
+  first_page_url:
+    description: "Ссылка на первую страницу"
+    type: "string"
+    example: "http://laravel-sample.loc?page=1"
+
+  from:
+    description: "Порядковый номер первого элемента на странице"
+    type:
+      - "integer"
+      - "null"
+    example: 1
+
+  next_page_url:
+    description: "Ссылка на следующую страницу"
+    type:
+      - "string"
+      - "null"
+    example: "http://laravel-sample.loc?page=2"
+
+  path:
+    description: "Текущий адрес"
+    type: "string"
+    example: "http://laravel-sample.loc"
+
+  per_page:
+    description: "Количество элементов на странице"
+    type: "integer"
+    example: 15
+
+  prev_page_url:
+    description: "Ссылка на предыдущую страницу"
+    type:
+      - "string"
+      - "null"
+    example: null
+
+  to:
+    description: "Порядковый номер последнего элемента на странице"
+    type:
+      - "integer"
+      - "null"
+    example: 15

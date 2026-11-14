@@ -1,0 +1,14 @@
+description: "Запрос"
+type: "object"
+properties:
+  sort:
+    description: "Сортировка"
+    type: "object"
+    properties:
+      id:
+        description: 'Поле "ID"'
+        type: "string"
+        enum:
+          - ASC
+          - DESC
+        example: "DESC"

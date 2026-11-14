@@ -1,0 +1,13 @@
+type: "object"
+properties:
+  cryptogram_phone:
+    description: "Криптограмма подтверждения телефона (см. /auth/confirm/phone)"
+    type: "string"
+    example: "eyJpdiI6ImJneTA3bGtTQTFEYnMvV<...>zBhNSIsInRhZyI6IiJ9"
+  code_phone:
+    description: "Код подтверждения (отправленный на телефон)"
+    type: "string"
+    example: "123456"
+required:
+  - "cryptogram_phone"
+  - "code_phone"

@@ -1,0 +1,5 @@
+allOf:
+  - $ref: "field_light.yaml"
+  - description: "Поля (heavy)"
+#    type: "object"
+#    properties:

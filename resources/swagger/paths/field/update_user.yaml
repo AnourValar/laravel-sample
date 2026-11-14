@@ -1,0 +1,48 @@
+post:
+  tags:
+    - Field
+  summary: "Изменение поля (статус)"
+  description: "ACL: cabinet.field.update - все"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "name"
+      in: "path"
+      description: "Техн. название (идентификатор) поля"
+      example: "personal_basic_prefix"
+      required: true
+    - name: "user_id"
+      in: "path"
+      description: "ID (пользователь)"
+      example: "10000"
+      required: true
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                field:
+                  allOf:
+                    - $ref: "../../index.yaml#/components/schemas/field_light"
+                    - properties:
+                        data:
+                          readOnly: true
+            - required:
+              - "field"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  field:
+                    $ref: "../../index.yaml#/components/responses/id"

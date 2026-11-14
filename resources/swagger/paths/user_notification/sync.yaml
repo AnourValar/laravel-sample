@@ -1,0 +1,47 @@
+post:
+  tags:
+    - User
+  summary: "Изменение настроек уведомлений пользователя"
+  description: "ACL: cabinet - собственные настройки, cabinet.user.update - все"
+  security:
+    - Bearer: []
+
+  parameters:
+    - name: "user_id"
+      in: "path"
+      description: "ID (пользователь)"
+      example: "10000"
+      required: true
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                user_notifications:
+                  description: "Уведомление (триггер)"
+                  type: "object"
+                  properties:
+                    user_email_updated:
+                      description: "Каналы"
+                      type: "array"
+                      example:
+                        - mail
+                        - database
+            - required:
+              - "user_notifications"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  user:
+                    $ref: "../../index.yaml#/components/responses/id"

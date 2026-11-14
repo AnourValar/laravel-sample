@@ -1,0 +1,46 @@
+post:
+  tags:
+    - User
+  summary: "Создание пользователя"
+  description: "ACL: cabinet.user.create - все"
+  security:
+    - Bearer: []
+
+#  parameters:
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: "../../index.yaml#/components/requestBodies/confirm_email"
+            - $ref: "../../index.yaml#/components/requestBodies/confirm_phone"
+            - type: "object"
+              properties:
+                user:
+                  allOf:
+                    - $ref: "../../index.yaml#/components/schemas/user_heavy"
+                    - properties:
+                        telegram_username:
+                          readOnly: true
+                        additional_abilities:
+                          readOnly: true
+                        tag_ids:
+                          readOnly: true
+                    - required:
+                      - "role"
+            - required:
+              - "user"
+
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  user:
+                    $ref: "../../index.yaml#/components/responses/id"

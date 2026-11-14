@@ -1,0 +1,35 @@
+post:
+  tags:
+    - User
+  summary: "Удаление TOTP-сессии (текущий пользователь)"
+  description: "ACL: cabinet - собственный профиль | FA: 1 [кроме session]"
+  security:
+    - Bearer: []
+
+#  parameters:
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: "object"
+              properties:
+                cryptograms_fa:
+                  description: "Криптограммы факторов (см. /auth/fa/*)"
+                  example:
+                    - "eyJpdiI6ImRNM3F6K2R1ZzRVODJtbmlOY2tBUFE9<...>GNhZTk2NzkzOTEyNGU0ZWZkODRmZGZhY2ZiZmE3OSIsInRhZyI6IiJ9"
+            - required:
+              - "cryptograms_fa"
+  responses:
+    200:
+      description: "Успешный запрос"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  user:
+                    $ref: "../../index.yaml#/components/responses/id"
